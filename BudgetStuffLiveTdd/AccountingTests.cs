@@ -6,12 +6,23 @@ namespace BudgetStuffLiveTdd
     [TestClass]
     public class AccountingTests
     {
+        private Accounting _accounting;
+
+        [TestInitializeAttribute]
+        public void TestInit()
+        {
+            _accounting = new Accounting();
+        }
+
         [TestMethod]
         public void no_budgets()
         {
-            var accounting = new Accounting();
-            var totalAmount = accounting.TotalAmount(new DateTime(), new DateTime());
-            Assert.AreEqual(0, totalAmount);
+            AmountShouldBe(new DateTime(), new DateTime(), 0);
+        }
+
+        private void AmountShouldBe(DateTime startDate, DateTime endDate, int expected)
+        {
+            Assert.AreEqual(expected, _accounting.TotalAmount(startDate, endDate));
         }
     }
 }
