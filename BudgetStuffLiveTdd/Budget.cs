@@ -7,35 +7,31 @@ namespace BudgetStuffLiveTdd
         public int Amount { get; set; }
         public string YearMonth { get; set; }
 
-        public DateTime FirstDay
+        private DateTime FirstDay
         {
             get { return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null); }
         }
 
-        public DateTime LastDay
+        private DateTime LastDay
         {
-            get
-            {
-                var days = Days();
-                return DateTime.ParseExact(YearMonth + days, "yyyyMMdd", null);
-            }
+            get { return DateTime.ParseExact(YearMonth + Days(), "yyyyMMdd", null); }
         }
 
-        public int Days()
+        public decimal EffectiveAmount(Period period)
         {
-            var days = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
-            return days;
+            return (decimal) period.OverlappingDays(new Period(FirstDay, LastDay)) * DailyAmount();
         }
 
-        public int DailyAmount()
+        private int DailyAmount()
         {
             var dailyAmount = Amount / Days();
             return dailyAmount;
         }
 
-        public decimal EffectiveAmount(Period period)
+        private int Days()
         {
-            return (decimal) period.OverlappingDays(this) * DailyAmount();
+            var days = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
+            return days;
         }
     }
 }

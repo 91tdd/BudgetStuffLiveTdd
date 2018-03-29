@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BudgetStuffLiveTdd
@@ -19,11 +18,6 @@ namespace BudgetStuffLiveTdd
 
             return _repository.GetBudgets()
                 .Sum(b => b.EffectiveAmount(period));
-        }
-
-        private bool HasNoBudgets(List<Budget> budgets)
-        {
-            return !budgets.Any();
         }
     }
 }

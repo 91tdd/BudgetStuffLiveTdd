@@ -18,28 +18,28 @@ namespace BudgetStuffLiveTdd
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
 
-        public double OverlappingDays(Budget budget)
+        public double OverlappingDays(Period period)
         {
-            if (HasNoOverlappingDays(budget))
+            if (HasNoOverlappingDays(period))
             {
                 return 0;
             }
 
-            var effectiveEndDate = EndDate > budget.LastDay
-                ? budget.LastDay
+            var effectiveEndDate = EndDate > period.EndDate
+                ? period.EndDate
                 : EndDate;
 
-            var effectiveStartDate = StartDate < budget.FirstDay
-                ? budget.FirstDay
+            var effectiveStartDate = StartDate < period.StartDate
+                ? period.StartDate
                 : StartDate;
 
             var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).TotalDays;
             return days;
         }
 
-        private bool HasNoOverlappingDays(Budget budget)
+        private bool HasNoOverlappingDays(Period period)
         {
-            return StartDate > budget.LastDay || EndDate < budget.FirstDay;
+            return StartDate > period.EndDate || EndDate < period.StartDate;
         }
     }
 }
