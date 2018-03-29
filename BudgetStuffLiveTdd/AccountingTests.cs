@@ -37,13 +37,23 @@ namespace BudgetStuffLiveTdd
         }
 
         [TestMethod]
-        public void no_overalpping_days_period_before_budget_month()
+        public void no_overlapping_days_period_before_budget_month()
         {
             GivenBudgets(
                 new Budget {YearMonth = "201704", Amount = 30}
             );
 
             AmountShouldBe(new DateTime(2017, 3, 31), new DateTime(2017, 3, 31), 0);
+        }
+
+        [TestMethod]
+        public void no_overlapping_days_period_after_budget_month()
+        {
+            GivenBudgets(
+                new Budget {YearMonth = "201704", Amount = 30}
+            );
+
+            AmountShouldBe(new DateTime(2017, 5, 1), new DateTime(2017, 5, 1), 0);
         }
 
         private void GivenBudgets(params Budget[] budgets)

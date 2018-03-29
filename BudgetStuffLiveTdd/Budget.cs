@@ -11,5 +11,20 @@ namespace BudgetStuffLiveTdd
         {
             get { return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null); }
         }
+
+        public DateTime LastDay
+        {
+            get
+            {
+                var days = Days();
+                return DateTime.ParseExact(YearMonth + days, "yyyyMMdd", null);
+            }
+        }
+
+        private int Days()
+        {
+            var days = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
+            return days;
+        }
     }
 }

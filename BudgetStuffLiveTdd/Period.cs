@@ -15,6 +15,10 @@ namespace BudgetStuffLiveTdd
 
         public double OverlappingDays(Budget budget)
         {
+            if (StartDate > budget.LastDay)
+            {
+                return 0;
+            }
             if (EndDate < budget.FirstDay)
             {
                 return 0;
