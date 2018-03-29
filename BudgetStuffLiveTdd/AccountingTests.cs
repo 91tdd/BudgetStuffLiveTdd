@@ -76,6 +76,17 @@ namespace BudgetStuffLiveTdd
             AmountShouldBe(new DateTime(2017, 3, 31), new DateTime(2017, 4, 1), 1);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidException))]
+        public void invalid_period()
+        {
+            GivenBudgets(
+                new Budget {YearMonth = "201704", Amount = 30}
+            );
+
+            AmountShouldBe(new DateTime(2017, 5, 31), new DateTime(2017, 4, 1), 1);
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _repository.GetBudgets().ReturnsForAnyArgs(budgets.ToList());

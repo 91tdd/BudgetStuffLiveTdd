@@ -6,6 +6,11 @@ namespace BudgetStuffLiveTdd
     {
         public Period(DateTime startDate, DateTime endDate)
         {
+            if (startDate > endDate)
+            {
+                throw new InvalidException();
+            }
+
             StartDate = startDate;
             EndDate = endDate;
         }
