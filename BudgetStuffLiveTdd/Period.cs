@@ -24,11 +24,9 @@ namespace BudgetStuffLiveTdd
                 ? budget.LastDay
                 : EndDate;
 
-            var effectiveStartDate = StartDate;
-            if (StartDate < budget.FirstDay)
-            {
-                effectiveStartDate = budget.FirstDay;
-            }
+            var effectiveStartDate = StartDate < budget.FirstDay
+                ? budget.FirstDay
+                : StartDate;
 
             var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).TotalDays;
             return days;
