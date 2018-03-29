@@ -15,11 +15,14 @@ namespace BudgetStuffLiveTdd
 
         public decimal TotalAmount(DateTime startDate, DateTime endDate)
         {
+            var period = new Period(startDate, endDate);
+
             var budgets = _repository.GetBudgets();
             if (HasNoBudgets(budgets)) return 0;
- 
-            var days = new Period(startDate, endDate).OverlappingDays(budgets[0]);
-            return (decimal) days;
+
+            var budget = budgets[0];
+
+            return budget.EffectiveAmount(period);
         }
 
         private bool HasNoBudgets(List<Budget> budgets)

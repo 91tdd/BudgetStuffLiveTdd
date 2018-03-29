@@ -21,10 +21,21 @@ namespace BudgetStuffLiveTdd
             }
         }
 
-        private int Days()
+        public int Days()
         {
             var days = DateTime.DaysInMonth(FirstDay.Year, FirstDay.Month);
             return days;
+        }
+
+        public int DailyAmount()
+        {
+            var dailyAmount = Amount / Days();
+            return dailyAmount;
+        }
+
+        public decimal EffectiveAmount(Period period)
+        {
+            return (decimal) period.OverlappingDays(this) * DailyAmount();
         }
     }
 }
