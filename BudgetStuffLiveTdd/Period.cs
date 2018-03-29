@@ -15,22 +15,20 @@ namespace BudgetStuffLiveTdd
 
         public double OverlappingDays(Budget budget)
         {
-            if (HasNoOveralppingDays(budget))
+            if (HasNoOverlappingDays(budget))
             {
                 return 0;
             }
 
-            var effectiveEndDate = EndDate;
-            if (EndDate > budget.LastDay)
-            {
-                effectiveEndDate = budget.LastDay;
-            }
+            var effectiveEndDate = EndDate > budget.LastDay
+                ? budget.LastDay
+                : EndDate;
 
             var days = (effectiveEndDate.AddDays(1) - StartDate).TotalDays;
             return days;
         }
 
-        private bool HasNoOveralppingDays(Budget budget)
+        private bool HasNoOverlappingDays(Budget budget)
         {
             return StartDate > budget.LastDay || EndDate < budget.FirstDay;
         }
