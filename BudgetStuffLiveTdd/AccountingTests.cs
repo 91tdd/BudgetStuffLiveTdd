@@ -97,6 +97,17 @@ namespace BudgetStuffLiveTdd
             AmountShouldBe(new DateTime(2017, 4, 1), new DateTime(2017, 4, 2), 200);
         }
 
+        [TestMethod]
+        public void multiple_budgets()
+        {
+            GivenBudgets(
+                new Budget {YearMonth = "201704", Amount = 3000},
+                new Budget {YearMonth = "201705", Amount = 31}
+            );
+
+            AmountShouldBe(new DateTime(2017, 4, 30), new DateTime(2017, 5, 3), 103);
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _repository.GetBudgets().ReturnsForAnyArgs(budgets.ToList());

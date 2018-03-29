@@ -17,12 +17,12 @@ namespace BudgetStuffLiveTdd
         {
             var period = new Period(startDate, endDate);
 
-            var budgets = _repository.GetBudgets();
-            if (HasNoBudgets(budgets)) return 0;
-
-            var budget = budgets[0];
-
-            return budget.EffectiveAmount(period);
+            var totalAmount = 0m;
+            foreach (var budget in _repository.GetBudgets())
+            {
+                totalAmount += budget.EffectiveAmount(period);
+            }
+            return totalAmount;
         }
 
         private bool HasNoBudgets(List<Budget> budgets)
