@@ -13,8 +13,12 @@ namespace BudgetStuffLiveTdd
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
 
-        public double Days()
+        public double OverlappingDays(Budget budget)
         {
+            if (EndDate < budget.FirstDay)
+            {
+                return 0;
+            }
             var days = (EndDate.AddDays(1) - StartDate).TotalDays;
             return days;
         }
