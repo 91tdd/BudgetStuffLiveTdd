@@ -56,6 +56,16 @@ namespace BudgetStuffLiveTdd
             AmountShouldBe(new DateTime(2017, 5, 1), new DateTime(2017, 5, 1), 0);
         }
 
+        [TestMethod]
+        public void one_overlapping_days_period_across_budget_LastDay()
+        {
+            GivenBudgets(
+                new Budget {YearMonth = "201704", Amount = 30}
+            );
+
+            AmountShouldBe(new DateTime(2017, 4, 30), new DateTime(2017, 5, 1), 1);
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _repository.GetBudgets().ReturnsForAnyArgs(budgets.ToList());
