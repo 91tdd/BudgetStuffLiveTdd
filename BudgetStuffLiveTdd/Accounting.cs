@@ -16,7 +16,7 @@ namespace BudgetStuffLiveTdd
         {
             if (_repository.GetBudgets().Any())
             {
-                var days = (endDate.AddDays(1) - startDate).TotalDays;
+                var days = new Period(startDate, endDate).Days();
                 return (decimal) days;
             }
             return 0;
